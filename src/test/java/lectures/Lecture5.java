@@ -19,6 +19,12 @@ public class Lecture5 {
   public void understandingFilter() throws Exception {
     ImmutableList<Car> cars = MockData.getCars();
 
+    List<Car> filteredCars = cars.stream()
+            .filter(car -> car.getPrice() <= 10000)
+            .collect(Collectors.toList());
+
+    filteredCars.forEach(System.out::println);
+    System.out.println(filteredCars.size());
   }
 
   @Test
