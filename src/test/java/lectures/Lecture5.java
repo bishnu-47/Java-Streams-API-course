@@ -1,6 +1,5 @@
 package lectures;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import beans.Car;
@@ -19,9 +18,8 @@ public class Lecture5 {
   public void understandingFilter() throws Exception {
     ImmutableList<Car> cars = MockData.getCars();
 
-    List<Car> filteredCars = cars.stream()
-            .filter(car -> car.getPrice() <= 10000)
-            .collect(Collectors.toList());
+    List<Car> filteredCars =
+        cars.stream().filter(car -> car.getPrice() <= 10000).collect(Collectors.toList());
 
     filteredCars.forEach(System.out::println);
     System.out.println(filteredCars.size());
@@ -31,7 +29,15 @@ public class Lecture5 {
   public void ourFirstMapping() throws Exception {
     // transform from one data type to another
     List<Person> people = MockData.getPeople();
+    List<PersonDTO> personDTOS =
+        people.stream()
+            .map(PersonDTO::map)
+            //            .map(person -> new PersonDTO(person.getId(), person.getFirstName(),
+            // person.getAge()))
+            .collect(Collectors.toList());
 
+    personDTOS.forEach(System.out::println);
+    assertThat(personDTOS).hasSize(1000);
   }
 
   @Test
@@ -41,10 +47,5 @@ public class Lecture5 {
   }
 
   @Test
-  public void test() throws Exception {
-
-  }
+  public void test() throws Exception {}
 }
-
-
-
