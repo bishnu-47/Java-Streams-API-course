@@ -1,20 +1,20 @@
 package lectures;
 
-
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 
 public class Lecture10 {
 
-  private static final List<ArrayList<String>> arrayListOfNames = Lists.newArrayList(
-      Lists.newArrayList("Mariam", "Alex", "Ismail"),
-      Lists.newArrayList("John", "Alesha", "Andre"),
-      Lists.newArrayList("Susy", "Ali")
-  );
+  private static final List<ArrayList<String>> arrayListOfNames =
+      Lists.newArrayList(
+          Lists.newArrayList("Mariam", "Alex", "Ismail"),
+          Lists.newArrayList("John", "Alesha", "Andre"),
+          Lists.newArrayList("Susy", "Ali"));
 
   @Before
   public void setUp() {
@@ -23,15 +23,23 @@ public class Lecture10 {
 
   @Test
   public void withoutFlatMap() throws Exception {
-//    [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    //    [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    List<String> names = new ArrayList<>();
 
+    for (List<String> list : arrayListOfNames) {
+      list.forEach(names::add);
+    }
+
+    System.out.println(names);
+    //    names.forEach(System.out::println);
   }
 
   @Test
   public void withFlatMap() throws Exception {
-//   [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    //   [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    List<String> names =
+        arrayListOfNames.stream().flatMap(List::stream).collect(Collectors.toList());
 
+    System.out.println(names);
   }
-
 }
-
