@@ -11,12 +11,20 @@ public class Lecture11 {
   @Test
   public void joiningStrings() throws Exception {
     List<String> names = ImmutableList.of("anna", "john", "marcos", "helena", "yasmin");
+    String str = "";
+    for (String name : names) {
+      str += name + ", ";
+    }
 
+    System.out.println(str);
   }
 
   @Test
   public void joiningStringsWithStream() throws Exception {
     List<String> names = ImmutableList.of("anna", "john", "marcos", "helena", "yasmin");
 
+    String joinedStr = names.stream().collect(Collectors.joining(", ", "[", "]"));
+
+    System.out.println(joinedStr);
   }
 }
